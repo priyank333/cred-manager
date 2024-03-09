@@ -1,0 +1,24 @@
+plugins {
+    id 'application'
+}
+
+group = 'com.credmanager'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+dependencies {
+    implementation("org.apache.commons:commons-lang3:3.0")
+}
+mainClassName = 'com.credmanager.Main'
+jar {
+    manifest {
+        attributes 'Main-Class': "$mainClassName"
+    }
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+}
